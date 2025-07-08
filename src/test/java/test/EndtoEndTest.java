@@ -3,59 +3,13 @@ package test;
 import data.Constants;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import utils.Wait;
 
-public class BaseTest {
-    WebDriver driver;
-
-    @BeforeMethod
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.get(Constants.URL.getValue());
-        driver.manage().window().maximize();
-    }
-
-    @Test
-    public void goToWebsiteTest() {
-        driver.get("https://www.demoblaze.com/");
-        driver.manage().window().maximize();
-    }
-
-    @Test
-    public void signUpTest() {
-        driver.findElement(By.xpath("//a[@id='signin2']")).click();
-        Wait.waitInSeconds(1);
-        driver.findElement(By.xpath("//input[@id='sign-username']"))
-                .sendKeys(Constants.USERNAME.getValue());
-        driver.findElement(By.xpath("//input[@id='sign-password']"))
-                .sendKeys(Constants.PASSWORD.getValue());
-        driver.findElement(By.xpath("//button[@onclick='register()']")).click();
-        Wait.waitInSeconds(1);
-        driver.switchTo().alert().accept();
-    }
-
-    @Test
-    public void logInTest() {
-        driver.findElement(By.xpath("//a[@id='login2']")).click();
-        Wait.waitInSeconds(1);
-        driver.findElement(By.xpath("//input[@id='loginusername']"))
-                .sendKeys(Constants.USERNAME.getValue());
-        driver.findElement(By.xpath("//input[@id='loginpassword']"))
-                .sendKeys(Constants.PASSWORD.getValue());
-        driver.findElement(By.xpath("//button[@onclick='logIn()']")).click();
-        Wait.waitInSeconds(1);
-        String actualMessage = driver.findElement(By.xpath("//a[@id='nameofuser']")).getText();
-        String expectedMessage = Constants.LOGIN_MESSAGE.getValue();
-        Wait.waitInSeconds(2);
-        Assert.assertEquals(actualMessage, expectedMessage);
-    }
+public class EndtoEndTest extends TestBase {
 
     @Test
     public void endToEndTest() {
