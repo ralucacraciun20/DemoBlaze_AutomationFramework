@@ -1,25 +1,25 @@
 package test;
 
-import data.Constants;
-
-import org.openqa.selenium.By;
-
 import org.testng.annotations.Test;
 
+import pages.HomePage;
+import pages.SignUpPage;
+
+import utils.AlertBox;
 import utils.Wait;
 
 public class CreateAccountTest extends TestBase {
 
     @Test
     public void signUpTest() {
-        driver.findElement(By.xpath("//a[@id='signin2']")).click();
+        HomePage homePage = new HomePage(driver);
+        homePage.clickSignIn();
         Wait.waitInSeconds(1);
-        driver.findElement(By.xpath("//input[@id='sign-username']"))
-                .sendKeys(Constants.USERNAME.getValue());
-        driver.findElement(By.xpath("//input[@id='sign-password']"))
-                .sendKeys(Constants.PASSWORD.getValue());
-        driver.findElement(By.xpath("//button[@onclick='register()']")).click();
+        SignUpPage signUpPage = new SignUpPage(driver);
+        signUpPage.inputUsername();
+        signUpPage.inputPassword();
+        signUpPage.clickRegisterButton();
         Wait.waitInSeconds(1);
-        driver.switchTo().alert().accept();
+        AlertBox.accept(driver);
     }
 }

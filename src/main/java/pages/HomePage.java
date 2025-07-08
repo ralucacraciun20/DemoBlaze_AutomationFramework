@@ -18,4 +18,8 @@ public class HomePage {
     public String getWelcomeMessage() {
         return driver.findElement(By.xpath("//a[@id='nameofuser']")).getText();
     }
+
+    public void clickSignIn() {
+        driver.findElement(By.xpath("//a[@id='signin2']")).click();
+    }
 }
