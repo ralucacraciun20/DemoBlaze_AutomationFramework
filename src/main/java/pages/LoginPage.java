@@ -5,12 +5,10 @@ import data.Constants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage {
-
-    private final WebDriver driver;
+public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void inputUsername() {

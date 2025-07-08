@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import utils.Wait;
 
-public class EndtoEndTest extends TestBase {
+public class EndToEndTest extends TestBase {
 
     @Test
     public void endToEndTest() {
