@@ -20,4 +20,12 @@ public class HomePage extends BasePage {
     public void clickSignIn() {
         driver.findElement(By.xpath("//a[@id='signin2']")).click();
     }
+
+    public void clickOnCategories() {
+        driver.findElement(By.xpath("(//a[@id='itemc'])[1]"));
+    }
+
+    public void clickOnCard() {
+        driver.findElement(By.xpath("//a[@id='cartur']")).click();
+    }
 }

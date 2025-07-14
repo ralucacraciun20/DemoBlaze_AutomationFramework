@@ -2,13 +2,14 @@ package test;
 
 import data.Constants;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import pages.HomePage;
 import pages.LoginPage;
-
-import utils.Wait;
 
 public class LoginTest extends TestBase {
 
@@ -16,15 +17,14 @@ public class LoginTest extends TestBase {
     public void logInTest() {
         HomePage homePage = new HomePage(driver);
         homePage.clickLoginLink();
-        Wait.waitInSeconds(1);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#logInModalLabel")));
         LoginPage loginPage = new LoginPage(driver);
         loginPage.inputUsername();
         loginPage.inputPassword();
         loginPage.clickLoginButton();
-        Wait.waitInSeconds(1);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#nameofuser")));
         String actualMessage = homePage.getWelcomeMessage();
         String expectedMessage = Constants.LOGIN_MESSAGE.getValue();
-        Wait.waitInSeconds(2);
         Assert.assertEquals(actualMessage, expectedMessage);
     }
 }

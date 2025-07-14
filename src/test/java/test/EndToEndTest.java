@@ -3,51 +3,60 @@ package test;
 import data.Constants;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import utils.Wait;
+import pages.HomePage;
+import pages.LoginPage;
+import pages.PlaceOrderPage;
+import pages.ProductStorePage;
+import pages.ConfirmationOrderPage;
+
+import utils.AlertBox;
 
 public class EndToEndTest extends TestBase {
 
     @Test
     public void endToEndTest() {
-        driver.findElement(By.xpath("//a[@id='login2']")).click();
-        Wait.waitInSeconds(1);
-        driver.findElement(By.xpath("//input[@id='loginusername']"))
-                .sendKeys(Constants.USERNAME.getValue());
-        driver.findElement(By.xpath("//input[@id='loginpassword']"))
-                .sendKeys(Constants.PASSWORD.getValue());
-        driver.findElement(By.xpath("//button[@onclick='logIn()']")).click();
-        Wait.waitInSeconds(1);
-        String actualMessage = driver.findElement(By.xpath("//a[@id='nameofuser']")).getText();
+        HomePage homePage = new HomePage(driver);
+        homePage.clickLoginLink();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#logInModalLabel")));
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.inputUsername();
+        loginPage.inputPassword();
+        loginPage.clickLoginButton();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#nameofuser")));
+        String actualMessage = homePage.getWelcomeMessage();
         String expectedMessage = Constants.LOGIN_MESSAGE.getValue();
-        Wait.waitInSeconds(2);
         Assert.assertEquals(actualMessage, expectedMessage);
-        driver.findElement(By.xpath("(//a[@id='itemc'])[1]"));
-        Wait.waitInSeconds(2);
-        driver.findElement(By.xpath("(//img[@src=\"imgs/galaxy_s6.jpg\"])[1]")).click();
-        Wait.waitInSeconds(1);
-        driver.findElement(By.xpath("//a[@onclick='addToCart(1)']")).click();
-        driver.findElement(By.xpath("//a[@id='cartur']")).click();
-        driver.findElement(By.xpath("//button[@data-target='#orderModal']")).click();
-        Wait.waitInSeconds(2);
-        driver.findElement(By.xpath("//input[@id='name']")).sendKeys(Constants.NAME.getValue());
-        driver.findElement(By.xpath("//input[@id='country']")).sendKeys(Constants.COUNTRY.getValue());
-        driver.findElement(By.xpath("//input[@id='city']")).sendKeys(Constants.CITY.getValue());
-        driver.findElement(By.xpath("//input[@id='card']")).sendKeys(Constants.CARD.getValue());
-        driver.findElement(By.xpath("//input[@id='month']")).sendKeys(Constants.MONTH.getValue());
-        driver.findElement(By.xpath("//input[@id='year']")).sendKeys(Constants.YEAR.getValue());
-        driver.findElement(By.xpath("//button[@onclick='purchaseOrder()']")).click();
-        Wait.waitInSeconds(1);
-        driver.findElement(By.xpath("(//button[@data-dismiss='modal'])[6]")).click();
-        String actualSuccessMessage1 = driver.findElement(
-                By.xpath("//h2[contains(text(),'Thank you for your purchase!')]")
-        ).getText();
+        homePage.clickOnCategories();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#cat:nth-child(1)")));
+        ProductStorePage productStorePage = new ProductStorePage(driver);
+        productStorePage.clickOnProduct();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".btn.btn-success.btn-lg")));
+        productStorePage.clickOnAddToCard();
+        wait.until(ExpectedConditions.alertIsPresent());
+        AlertBox.accept(driver);
+        homePage.clickOnCard();
+        productStorePage.clickOnPlaceOrder();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#orderModalLabel")));
+        PlaceOrderPage placeOrderPage = new PlaceOrderPage(driver);
+        placeOrderPage.inputName();
+        placeOrderPage.inputCountry();
+        placeOrderPage.inputCity();
+        placeOrderPage.inputCard();
+        placeOrderPage.inputMonth();
+        placeOrderPage.inputYear();
+        placeOrderPage.clickOnPurchaseOrderButton();
+        placeOrderPage.clickOnDismissButton();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sa-icon.sa-custom + h2")));
+        ConfirmationOrderPage confirmationOrderPage = new ConfirmationOrderPage(driver);
+        String actualSuccessMessage1 = confirmationOrderPage.getPurchaseMessage();
         String expectedSuccessMessage1 = Constants.PURCHASE_MESSAGE.getValue();
-        Wait.waitInSeconds(2);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sa-icon.sa-custom + h2")));
         Assert.assertEquals(actualSuccessMessage1, expectedSuccessMessage1);
-        driver.findElement(By.xpath("//button[@style='display: inline-block;']")).click();
+        confirmationOrderPage.clickOnOkButton();
     }
 }
