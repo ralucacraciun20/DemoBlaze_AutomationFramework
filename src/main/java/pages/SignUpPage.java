@@ -13,7 +13,7 @@ public class SignUpPage extends BasePage {
 
     public void inputUsername() {
         driver.findElement(By.xpath("//input[@id='sign-username']"))
-                .sendKeys(Constants.USERNAME.getValue());
+                .sendKeys(Constants.RANDOM_USERNAME.getValue());
     }
 
     public void inputPassword() {
