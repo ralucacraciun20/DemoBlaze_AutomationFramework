@@ -11,7 +11,7 @@ public enum Constants {
 
     URL("https://www.demoblaze.com/"),
     LOGIN_MESSAGE("Welcome Maria1942"),
-    RANDOM_USERNAME(generateRandomUsername()),
+  //  RANDOM_USERNAME(generateRandomUsername()),
     USERNAME("Maria1942"),
     PASSWORD("Pass1234"),
     PURCHASE_MESSAGE("Thank you for your purchase!"),
