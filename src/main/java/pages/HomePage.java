@@ -2,30 +2,37 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class HomePage extends BasePage {
+
+    WebElement loginLink = driver.findElement(By.xpath("//a[@id='login2']"));
+    WebElement welcomeMessage = driver.findElement(By.xpath("//a[@id='nameofuser']"));
+    WebElement signInButton = driver.findElement(By.xpath("//a[@id='signin2']"));
+    WebElement categoriesDropDown = driver.findElement(By.xpath("(//a[@id='itemc'])[1]"));
+    WebElement cartButton = driver.findElement(By.xpath("//a[@id='cartur']"));
 
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
     public void clickLoginLink() {
-        driver.findElement(By.xpath("//a[@id='login2']")).click();
+        loginLink.click();
     }
 
     public String getWelcomeMessage() {
-        return driver.findElement(By.xpath("//a[@id='nameofuser']")).getText();
+        return welcomeMessage.getText();
     }
 
     public void clickSignIn() {
-        driver.findElement(By.xpath("//a[@id='signin2']")).click();
+        signInButton.click();
     }
 
     public void clickOnCategories() {
-        driver.findElement(By.xpath("(//a[@id='itemc'])[1]"));
+        categoriesDropDown.click();
     }
 
-    public void clickOnCard() {
-        driver.findElement(By.xpath("//a[@id='cartur']")).click();
+    public void clickOnCart() {
+        cartButton.click();
     }
 }

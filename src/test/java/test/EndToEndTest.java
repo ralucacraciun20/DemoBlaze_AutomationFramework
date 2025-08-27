@@ -36,10 +36,10 @@ public class EndToEndTest extends TestBase {
         ProductStorePage productStorePage = new ProductStorePage(driver);
         productStorePage.clickOnProduct();
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".btn.btn-success.btn-lg")));
-        productStorePage.clickOnAddToCard();
+        productStorePage.clickOnAddToCart();
         wait.until(ExpectedConditions.alertIsPresent());
         AlertBox.accept(driver);
-        homePage.clickOnCard();
+        homePage.clickOnCart();
         productStorePage.clickOnPlaceOrder();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#orderModalLabel")));
         PlaceOrderPage placeOrderPage = new PlaceOrderPage(driver);
