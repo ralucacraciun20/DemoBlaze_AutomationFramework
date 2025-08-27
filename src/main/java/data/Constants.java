@@ -13,7 +13,9 @@ public enum Constants {
     LOGIN_MESSAGE("Welcome Maria1942"),
     RANDOM_USERNAME(generateRandomUsername()),
     USERNAME("Maria1942"),
+    WRONG_USERNAME("Maria12346"),
     PASSWORD("Pass1234"),
+    WRONG_PASSWORD("123546"),
     PURCHASE_MESSAGE("Thank you for your purchase!"),
     NAME("Raluca"),
     COUNTRY("Romania"),
@@ -23,10 +25,10 @@ public enum Constants {
     YEAR("2025");
 
     private final String value;
-
-    static final Random rnd = new Random();
+    private static Random rnd = null;
 
     private static String generateRandomUsername() {
+        rnd = new Random();
         int number = rnd.nextInt(10000);
         return "Maria" + number;
     }

@@ -17,6 +17,7 @@ public class TestBase {
     @BeforeMethod
     public void setUp() {
         driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10L));
         driver.get(Constants.URL.getValue());
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10L));
