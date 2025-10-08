@@ -24,5 +24,6 @@ public class SignUpPage extends BasePage {
 
     public void clickRegisterButton() {
         registerButton.click();
+        log.info("Clicked on login button");
     }
 }

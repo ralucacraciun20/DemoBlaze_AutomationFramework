@@ -1,8 +1,10 @@
 package data;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.io.File;
 import java.util.Random;
 
 @Getter
@@ -14,7 +16,7 @@ public enum Constants {
     RANDOM_USERNAME(generateRandomUsername()),
     USERNAME("Maria1942"),
     WRONG_USERNAME("Maria12346"),
-    PASSWORD("Pass1234"),
+    PASSWORD(readFromEnvFile()),
     WRONG_PASSWORD("123546"),
     PURCHASE_MESSAGE("Thank you for your purchase!"),
     NAME("Raluca"),
@@ -31,5 +33,10 @@ public enum Constants {
         rnd = new Random();
         int number = rnd.nextInt(10000);
         return "Maria" + number;
+    }
+
+    private static String readFromEnvFile() {
+       Dotenv dotenv = Dotenv.load();
+       return dotenv.get("PASSWORD");
     }
 }
